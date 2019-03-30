@@ -25,7 +25,7 @@ The client speaks first and asks for a connection to the server.
 
 4 - Server to Client : <computation> is <result>
 
-5 - Client to Server : I'm done
+5 - Client to Server : BYE
 
 Steps 3 and 4 can be repeated.
 
