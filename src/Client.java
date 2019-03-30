@@ -23,29 +23,6 @@ public class Client {
     boolean connected = false;
 
     /**
-     * This inner class implements the Runnable interface, so that the run()
-     * method can execute on its own thread. This method reads data sent from the
-     * server, line by line, until the connection is closed or lost.
-     */
-//    class NotificationListener implements Runnable {
-//
-//        @Override
-//        public void run() {
-//            String notification;
-//            try {
-//                while ((connected && (notification = in.readLine()) != null)) {
-//                    LOG.log(Level.INFO, "Server notification for {1}", new Object[]{notification});
-//                }
-//            } catch (IOException e) {
-//                LOG.log(Level.SEVERE, "Connection problem in client used by {1}", new Object[]{e.getMessage()});
-//                connected = false;
-//            } finally {
-//                cleanup();
-//            }
-//        }
-//    }
-
-    /**
      * This method is used to send a calculation to the server and get the result.
      * @param computation Calculation to compute
      */
@@ -130,7 +107,8 @@ public class Client {
         Client c1 = new Client();
         c1.connect("10.192.105.166", 2205);
 
-        // TODO Make calculation
+        c1.compute("ADD 2 3");
+        c1.compute("SUB 20 50");
 
         c1.disconnect();
     }
