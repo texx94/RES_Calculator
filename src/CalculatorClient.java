@@ -27,7 +27,7 @@ public class CalculatorClient {
      * @param computation Calculation to compute
      */
     public void compute(String computation) {
-        LOG.log(Level.INFO, "this calculation is sent to the server: {0}", computation);
+        LOG.log(Level.INFO, "Client request: {0}", computation);
 
         // Send the computation
         out.println(computation);
@@ -38,10 +38,10 @@ public class CalculatorClient {
         try {
             while (connected && in.ready()) {
                 result = in.readLine();
-                LOG.log(Level.INFO, "The result is {0}", result);
+                LOG.log(Level.INFO, "Server response: {0}", result);
             }
         } catch (IOException e) {
-            LOG.log(Level.SEVERE, "Unable to get the result: {0}", e.getMessage());
+            LOG.log(Level.SEVERE, "Unable to get the server response: {0}", e.getMessage());
             connected = false;
         }
     }
@@ -108,7 +108,7 @@ public class CalculatorClient {
 
         // Connection to the server
         CalculatorClient c1 = new CalculatorClient();
-        c1.connect("localhost", 2205);
+        c1.connect("localhost", 2205);  // TODO add container IP !
 
         while (true) {
             // prompt the user to enter their calculation
@@ -116,18 +116,19 @@ public class CalculatorClient {
 
             // get user input
             String computation = "";
+
             try {
                 computation = reader.readLine();
             } catch (IOException e) {
                 LOG.log(Level.SEVERE, "Unable to read user calculation: {0}", e.getMessage());
             }
 
-            if (computation.equals("exit")) {
+            if (computation.equals("BYE")) {
                 c1.disconnect();
                 return;
+            } else {
+                c1.compute(computation);
             }
-
-            c1.compute(computation);
         }
     }
 }
