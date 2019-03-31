@@ -21,15 +21,16 @@ The client speaks first and asks for a connection to the server.
 
 2 - Server to Client : Yes, I am. Welcome.
 
-3 - Client to Server : How much is <computation> ?
+3 - Client to Server : How much is \<computation> ?
 
-4 - Server to Client : <computation> is <result>
+4 - Server to Client : \<computation> is \<result>
 
 5 - Client to Server : BYE
 
 Steps 3 and 4 can be repeated.
 
 * **What happens when a message is received from the other party ?**
+
 ...
 
 * **What is the syntax of the messages? How we generate and parse them ?**
