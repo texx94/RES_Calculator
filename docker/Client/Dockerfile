@@ -8,4 +8,4 @@ COPY CalculatorClient.class /opt/app/client.class
 #
 # This is the command that is executed when the Docker container starts
 #
-CMD ["java", "/opt/app/client.class"]
+CMD ["java", "/opt/app/client"]

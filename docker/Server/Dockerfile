@@ -10,4 +10,4 @@ EXPOSE 2205
 #
 # This is the command that is executed when the Docker container starts
 #
-CMD ["java", "/opt/app/server.class"]
+CMD ["java", "/opt/app/server"]
