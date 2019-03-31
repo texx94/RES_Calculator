@@ -3,9 +3,9 @@ FROM java:8
 #
 # When we build the image, we copy the executable jar in the image file system.
 #
-COPY CalculatorClient.class /opt/app/client.class
+COPY client.jar /opt/app/client.jar
 
 #
 # This is the command that is executed when the Docker container starts
 #
-CMD ["java", "/opt/app/client"]
+#CMD ["java", "-jar", "/opt/app/client.jar"]

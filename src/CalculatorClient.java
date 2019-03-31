@@ -108,7 +108,7 @@ public class CalculatorClient {
 
         // Connection to the server
         CalculatorClient c1 = new CalculatorClient();
-        c1.connect("localhost", 2205);  // TODO add container IP !
+        c1.connect("cserver", 2205);  // TODO add container IP !
 
         while (true) {
             // prompt the user to enter their calculation
