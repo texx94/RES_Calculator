@@ -36,14 +36,13 @@ public class CalculatorClient {
         // Read the result
         String result;
         try {
-            while ((connected && (result = in.readLine()) != null)) {
-                LOG.log(Level.INFO, "The result is {0}", computation);
+            while (connected && in.ready()) {
+                result = in.readLine();
+                LOG.log(Level.INFO, "The result is {0}", result);
             }
         } catch (IOException e) {
             LOG.log(Level.SEVERE, "Unable to get the result: {0}", e.getMessage());
             connected = false;
-        } finally {
-            cleanup();
         }
     }
 
@@ -64,8 +63,9 @@ public class CalculatorClient {
 
             // Read welcome message from the server
             String message;
-            while ((connected && (message = in.readLine()) != null)) {
-                LOG.log(Level.INFO, "Server response {0}", message);
+            while (connected && in.ready()) {
+                message = in.readLine();
+                LOG.log(Level.INFO, "Server response: {0}", message);
             }
         } catch (IOException e) {
             LOG.log(Level.SEVERE, "Unable to connect to server: {0}", e.getMessage());
@@ -108,7 +108,7 @@ public class CalculatorClient {
 
         // Connection to the server
         CalculatorClient c1 = new CalculatorClient();
-        c1.connect("10.192.105.166", 2205);
+        c1.connect("localhost", 2205);
 
         while (true) {
             // prompt the user to enter their calculation
@@ -123,7 +123,6 @@ public class CalculatorClient {
             }
 
             if (computation.equals("exit")) {
-                System.out.println("je passe ici");
                 c1.disconnect();
                 return;
             }
