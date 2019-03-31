@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,7 +12,7 @@ import java.util.logging.Logger;
  * When the client connects to a server, he can ask the server to compute
  * a calculation.
  *
- * @author Mateo Tutic
+ * @author Mateo Tutic, inspired by 06-PresenceApplication example
  */
 public class Client {
 
@@ -27,7 +28,7 @@ public class Client {
      * @param computation Calculation to compute
      */
     public void compute(String computation) {
-        LOG.log(Level.INFO, computation);
+        LOG.log(Level.INFO, "this calculation is sent to the server: {0}", computation);
 
         // Send the computation
         out.println(computation);
@@ -40,7 +41,7 @@ public class Client {
                 LOG.log(Level.INFO, "The result is {0}", computation);
             }
         } catch (IOException e) {
-            LOG.log(Level.SEVERE, "Unable to get the result: {1}", e.getMessage());
+            LOG.log(Level.SEVERE, "Unable to get the result: {0}", e.getMessage());
             connected = false;
         } finally {
             cleanup();
@@ -104,12 +105,31 @@ public class Client {
     }
 
     public static void main(String[] args) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        // Connection to the server
         Client c1 = new Client();
         c1.connect("10.192.105.166", 2205);
 
-        c1.compute("ADD 2 3");
-        c1.compute("SUB 20 50");
+        while (true) {
+            // prompt the user to enter their calculation
+            System.out.print("Enter your calculation : ");
 
-        c1.disconnect();
+            // get user input
+            String computation = "";
+            try {
+                computation = reader.readLine();
+            } catch (IOException e) {
+                LOG.log(Level.SEVERE, "Unable to read user calculation: {0}", e.getMessage());
+            }
+
+            if (computation.equals("exit")) {
+                System.out.println("je passe ici");
+                c1.disconnect();
+                return;
+            }
+
+            c1.compute(computation);
+        }
     }
 }
