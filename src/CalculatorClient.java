@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,9 +13,9 @@ import java.util.logging.Logger;
  *
  * @author Mateo Tutic, inspired by 06-PresenceApplication example
  */
-public class Client {
+public class CalculatorClient {
 
-    final static Logger LOG = Logger.getLogger(Client.class.getName());
+    final static Logger LOG = Logger.getLogger(CalculatorClient.class.getName());
 
     Socket clientSocket;
     BufferedReader in;
@@ -76,7 +75,7 @@ public class Client {
     }
 
     public void disconnect() {
-        LOG.log(Level.INFO, "Client has requested to be disconnected.");
+        LOG.log(Level.INFO, "CalculatorClient has requested to be disconnected.");
         connected = false;
         out.println("BYE");
         cleanup();
@@ -108,7 +107,7 @@ public class Client {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         // Connection to the server
-        Client c1 = new Client();
+        CalculatorClient c1 = new CalculatorClient();
         c1.connect("10.192.105.166", 2205);
 
         while (true) {
